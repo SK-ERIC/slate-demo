@@ -1,0 +1,52 @@
+@import './theme.less';
+
+html,
+body {
+  background-color: transparent;
+  font-family: @font-family;
+  font-size: @font-size-base;
+  color: @text-color;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased !important;
+}
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+textarea {
+  padding: @space-sm;
+}
+table tr td,
+table tr th {
+  text-align: center;
+  padding: @space-base;
+  line-height: normal;
+}
+table tr td .ant-select {
+  width: 100%;
+}
+table tr td a {
+  padding: 0 @space-sm;
+}
+h1,
+.h1 {
+  font-size: @font-size-hg;
+}
+h2,
+.h2 {
+  font-size: @font-size-hg;
+}
+h3,
+.h3 {
+  font-size: @font-size-lg;
+}
+h4,
+.h4 {
+  font-size: @font-size-lg;
+  color: @text-color-bold;
+}
+h5,
+.h5 {
+  font-size: @font-size-base;
+}
