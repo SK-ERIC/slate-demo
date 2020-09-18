@@ -4,10 +4,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
 
+
+import '@assets/css/global.m.less';
+
+
 ReactDOM.render(
-    <React.StrictMode>
-        <App/>
-    </React.StrictMode>,
+  <App/>,
+    // <React.StrictMode>
+
+    // </React.StrictMode>,
     document.getElementById('root')
 );
 

@@ -26,6 +26,7 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
+const { options } = require('less');
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -112,7 +113,7 @@ module.exports = function(webpackEnv) {
       },
       {
         loader: require.resolve('less-loader'),
-        options: lessOptions,
+        options: {...lessOptions,javascriptEnabled: true},
       },
     ].filter(Boolean);
     if (preProcessor) {
@@ -125,9 +126,10 @@ module.exports = function(webpackEnv) {
         },
         {
           loader: require.resolve(preProcessor),
-          options: {
-            sourceMap: true,
-          },
+          // options: {
+          //   sourceMap: true,
+          // },
+          options: Object.assign({},{ sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment, }, cssOptions)
         }
       );
     }
@@ -298,9 +300,10 @@ module.exports = function(webpackEnv) {
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
         // 减少使用别名提高编译速速
-        '@': path.join(__dirname, '../src'),
-        '@components':path.join(__dirname,'../src/components'),
-        '@styles':path.join(__dirname, '../src/styles'),
+        '@': paths.appSrc,
+        '@components':path.resolve(__dirname,'../src/components'),
+        '@assets':path.resolve(__dirname,'../src/assets'),
+        '@styles':path.resolve(__dirname, '../src/styles'),
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
@@ -505,6 +508,7 @@ module.exports = function(webpackEnv) {
               use: getStyleLoaders({
                 importLoaders: 2,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
+                modules: true,
               },
               'less-loader'
               ),
